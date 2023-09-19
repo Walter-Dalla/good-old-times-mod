@@ -4,26 +4,23 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
-import org.jetbrains.annotations.Nullable;
 
-public class MaceneratorScreenHandler extends ScreenHandler {
+public class MaceratorScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-    private PropertyDelegate propertyDelegate;
-    public MaceneratorScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
+    private final PropertyDelegate propertyDelegate;
+    public MaceratorScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
                 new ArrayPropertyDelegate(2));
     }
 
-    public MaceneratorScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
-        super(ModScreenHandler.MACENERATOR_SCREEN_HANDLER, syncId);
+    public MaceratorScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
+        super(ModScreenHandler.macerator_SCREEN_HANDLER, syncId);
         checkSize((Inventory) entity, 3);
         this.inventory = (Inventory)entity;
         inventory.onOpen(playerInventory.player);

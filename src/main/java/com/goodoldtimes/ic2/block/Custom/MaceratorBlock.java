@@ -1,18 +1,18 @@
-package com.goodoldtimes.Block.Custom;
+package com.goodoldtimes.ic2.block.Custom;
 
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
-import com.goodoldtimes.ic2.block.machine.MaceneratorBlockEntity;
+import com.goodoldtimes.ic2.block.machine.MaceratorBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,16 +23,15 @@ import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class MaceneratorBlock extends BlockWithEntity implements BlockEntityProvider {
+import java.util.Random;
+
+public class MaceratorBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    protected MaceneratorBlock(Settings settings) {
+    protected MaceratorBlock(Settings settings) {
         super(settings);
     }
 
@@ -69,15 +68,20 @@ public class MaceneratorBlock extends BlockWithEntity implements BlockEntityProv
 
     @Override
     public BlockRenderType getRenderType(BlockState state) {
+
+
         return BlockRenderType.MODEL;
     }
+
+
+
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof MaceneratorBlockEntity) {
-                ItemScatterer.spawn(world, pos, (MaceneratorBlockEntity)blockEntity);
+            if (blockEntity instanceof MaceratorBlockEntity) {
+                ItemScatterer.spawn(world, pos, (MaceratorBlockEntity)blockEntity);
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -88,7 +92,7 @@ public class MaceneratorBlock extends BlockWithEntity implements BlockEntityProv
     public ActionResult onUse(BlockState state, World world, BlockPos pos,
                               PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = ((MaceneratorBlockEntity) world.getBlockEntity(pos));
+            NamedScreenHandlerFactory screenHandlerFactory = ((MaceratorBlockEntity) world.getBlockEntity(pos));
 
             if (screenHandlerFactory != null) {
                 player.openHandledScreen(screenHandlerFactory);
@@ -101,12 +105,12 @@ public class MaceneratorBlock extends BlockWithEntity implements BlockEntityProv
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new MaceneratorBlockEntity(pos, state);
+        return new MaceratorBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.MACENERATOR, MaceneratorBlockEntity::tick);
+        return checkType(type, ModBlockEntities.macerator, MaceratorBlockEntity::tick);
     }
 }

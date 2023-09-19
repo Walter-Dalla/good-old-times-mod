@@ -2,6 +2,7 @@ package com.goodoldtimes;
 
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.Screen.ModScreenHandler;
+import com.goodoldtimes.Block.ModBlock;
 import com.goodoldtimes.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -22,6 +23,7 @@ public class GoodOldTimesMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlockEntities.registerBlockEntity();
 		ModScreenHandler.registerAllScreenHandler();
+		ModBlock.registerModBlocks();
 
 		LOGGER.info("Hello Fabric world!");
 	}

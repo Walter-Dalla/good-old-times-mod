@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "good-old-times:block/macerator_block",
+    "north": "good-old-times:block/macerator_block",
+    "south": "good-old-times:block/macerator_block",
+    "west": "good-old-times:block/macerator_block",
+    "east": "good-old-times:block/macerator_block",
+    "up": "good-old-times:block/macerator_block",
+    "down": "good-old-times:block/macerator_block"
+  }
+}
