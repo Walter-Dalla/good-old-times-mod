@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 
 public class ModBlock {
     public static final Block MACERATOR = registerBlock(MaceratorBlock.BLOCK_ID,
-        new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
+        new MaceratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
 
     public static void registerModBlocks(){
 

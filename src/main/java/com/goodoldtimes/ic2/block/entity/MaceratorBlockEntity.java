@@ -4,6 +4,8 @@ import com.goodoldtimes.Block.Entity.ImplementedInventory;
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.GoodOldTimesMod;
 import com.goodoldtimes.ic2.Screen.MaceratorScreenHandler;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,9 +15,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -26,10 +32,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class MaceratorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     protected final PropertyDelegate propertyDelegate;
      public static final String BLOCK_ID = "macerator_block_entity";
+    public static final BooleanProperty onRunning = BooleanProperty.of("onRunning");
+
     public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_" + BLOCK_ID);
     private int progress = 0;
     private int maxProgress = 0;
@@ -37,6 +45,11 @@ public class MaceratorBlockEntity extends BlockEntity implements NamedScreenHand
     private int maxFuelTime = 0;
     public int number = 0;
 
+
+
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        builder.add(onRunning);
+    }
 
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         LOGGER.info("MaceratorBlockEntity - client");
@@ -160,5 +173,10 @@ public class MaceratorBlockEntity extends BlockEntity implements NamedScreenHand
         Inventories.readNbt(nbt, inventory);
         progress = nbt.getInt("macerator_block.progress");
 
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
     }
 }

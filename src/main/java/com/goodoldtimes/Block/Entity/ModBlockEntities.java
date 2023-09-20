@@ -18,7 +18,7 @@ public class ModBlockEntities {
     public static BlockEntityType<MaceratorBlockEntity> MACERATOR =
         Registry.register(
             Registries.BLOCK_ENTITY_TYPE,
-            new Identifier(GoodOldTimesMod.MOD_ID, MaceratorBlock.BLOCK_ID),
+            new Identifier(GoodOldTimesMod.MOD_ID, MaceratorBlock.BLOCK_ID+"_entity"),
             FabricBlockEntityTypeBuilder.create(MaceratorBlockEntity::new,
                     ModBlock.MACERATOR)
                     .build(null)
