@@ -1,9 +1,9 @@
 package com.goodoldtimes.ic2.Screen;
 
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
@@ -14,15 +14,14 @@ import net.minecraft.screen.slot.Slot;
 public class MaceratorScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public MaceratorScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
-                new ArrayPropertyDelegate(2));
+    public MaceratorScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
+        this(syncId, playerInventory, new SimpleInventory(3), new ArrayPropertyDelegate(2));
     }
 
-    public MaceratorScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity entity, PropertyDelegate delegate) {
-        super(ModScreenHandler.macerator_SCREEN_HANDLER, syncId);
-        checkSize((Inventory) entity, 3);
-        this.inventory = (Inventory)entity;
+    public MaceratorScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
+        super(ModScreenHandler.MACERATOR_SCREEN_HANDLER, syncId);
+        checkSize(inventory, 3);
+        this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
 
@@ -55,9 +54,8 @@ public class MaceratorScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return false;
+        return this.inventory.canPlayerUse(player);
     }
-
 
 
     // Helpers

@@ -1,12 +1,11 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "good-old-times:block/macerator_block",
-    "north": "good-old-times:block/macerator_block",
-    "south": "good-old-times:block/macerator_block",
-    "west": "good-old-times:block/macerator_block",
-    "east": "good-old-times:block/macerator_block",
-    "up": "good-old-times:block/macerator_block",
-    "down": "good-old-times:block/macerator_block"
+    "north": "good-old-times:block/macerator_block_north_off",
+    "south": "good-old-times:block/machine_block_south_default",
+    "west": "good-old-times:block/machine_block_west_default",
+    "east": "good-old-times:block/machine_block_east_default",
+    "up": "good-old-times:block/macerator_block_up_off",
+    "down": "good-old-times:block/machine_block_down_default"
   }
 }

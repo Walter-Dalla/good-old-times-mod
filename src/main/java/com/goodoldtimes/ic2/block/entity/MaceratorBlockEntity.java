@@ -1,9 +1,9 @@
-package com.goodoldtimes.ic2.block.machine;
+package com.goodoldtimes.ic2.block.entity;
 
 import com.goodoldtimes.Block.Entity.ImplementedInventory;
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
+import com.goodoldtimes.GoodOldTimesMod;
 import com.goodoldtimes.ic2.Screen.MaceratorScreenHandler;
-import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,25 +22,30 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.inventory.Inventories;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
-public class MaceratorBlockEntity extends BlockEntity implements BlockEntityProvider, NamedScreenHandlerFactory, ImplementedInventory {
+public class MaceratorBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     protected final PropertyDelegate propertyDelegate;
+     public static final String BLOCK_ID = "macerator_block_entity";
+    public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_" + BLOCK_ID);
     private int progress = 0;
     private int maxProgress = 0;
     private int fuelTime = 0;
     private int maxFuelTime = 0;
+    public int number = 0;
 
 
-    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        LOGGER.info("MaceratorBlockEntity - client");
         return new MaceratorBlockEntity(pos, state);
     }
 
     public MaceratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.macerator, pos, state);
-
+        super(ModBlockEntities.MACERATOR, pos, state);
+        LOGGER.info("MaceratorBlockEntity");
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 switch (index) {
@@ -72,7 +77,7 @@ public class MaceratorBlockEntity extends BlockEntity implements BlockEntityProv
 
     @Override
     public Text getDisplayName() {
-        return Text.literal("macerator");
+        return Text.translatable(getCachedState().getBlock().getTranslationKey());
     }
 
     @Nullable
@@ -146,14 +151,14 @@ public class MaceratorBlockEntity extends BlockEntity implements BlockEntityProv
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("macerator.progress", progress);
+        nbt.putInt("macerator_block.progress", progress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("macerator.progress");
+        progress = nbt.getInt("macerator_block.progress");
 
     }
 }

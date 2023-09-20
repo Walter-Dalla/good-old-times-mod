@@ -1,11 +1,13 @@
 package com.goodoldtimes.Block;
 
 import com.goodoldtimes.GoodOldTimesMod;
+import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -16,9 +18,8 @@ import net.minecraft.util.Identifier;
 
 
 public class ModBlock {
-    public static final Block MACERATOR = registerBlock("macerator_block",
-        new Block(FabricBlockSettings.create()),
-        null);
+    public static final Block MACERATOR = registerBlock(MaceratorBlock.BLOCK_ID,
+        new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
 
     public static void registerModBlocks(){
 

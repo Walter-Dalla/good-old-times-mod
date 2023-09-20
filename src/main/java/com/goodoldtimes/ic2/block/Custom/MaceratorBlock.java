@@ -1,96 +1,67 @@
 package com.goodoldtimes.ic2.block.Custom;
 
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
-import com.goodoldtimes.ic2.block.machine.MaceratorBlockEntity;
+import com.goodoldtimes.GoodOldTimesMod;
+import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-
-import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MaceratorBlock extends BlockWithEntity implements BlockEntityProvider {
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final String BLOCK_ID = "macerator_block";
+    public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_" + BLOCK_ID);
 
-    protected MaceratorBlock(Settings settings) {
+    public MaceratorBlock(Settings settings) {
         super(settings);
-    }
-
-    private static VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 10, 16);
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
-
-    @Nullable
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        LOGGER.info("MaceratorBlock");
+        System.out.println("This is a message for development.");
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
-    }
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
 
-    @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+        LOGGER.info("MaceratorBlock");
+        System.out.println("This is a message for development.");
     }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
-
 
     /* BLOCK ENTITY */
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-
-
-        return BlockRenderType.MODEL;
-    }
-
-
-
-
-    @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        LOGGER.info("OnReplaced");
+
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MaceratorBlockEntity) {
                 ItemScatterer.spawn(world, pos, (MaceratorBlockEntity)blockEntity);
+                // update comparators
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
 
+
+
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos,
-                              PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = ((MaceratorBlockEntity) world.getBlockEntity(pos));
 
@@ -102,15 +73,40 @@ public class MaceratorBlock extends BlockWithEntity implements BlockEntityProvid
         return ActionResult.SUCCESS;
     }
 
-    @Nullable
+
+    //@Override
+    public ActionResult onUse2(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        LOGGER.info("OnUse");
+
+        if (!world.isClient) {
+            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
+
+            if (screenHandlerFactory != null) {
+                player.openHandledScreen(screenHandlerFactory);
+            }
+        }
+        return ActionResult.SUCCESS;
+    }
+
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        LOGGER.info("createBlockEntity");
+
         return new MaceratorBlockEntity(pos, state);
+    }
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        LOGGER.info("getRenderType");
+
+        //With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
+        return BlockRenderType.MODEL;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.macerator, MaceratorBlockEntity::tick);
+        LOGGER.info("getTicker");
+
+        return checkType(type, ModBlockEntities.MACERATOR, MaceratorBlockEntity::tick);
     }
 }

@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
 
     private static final Identifier TEXTURE =
-            new Identifier(GoodOldTimesMod.MOD_ID, "textures/macerator_gui.png");
+            new Identifier(GoodOldTimesMod.MOD_ID, "textures/gui/macerator_gui.png");
 
     public MaceratorScreen(MaceratorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -24,12 +24,12 @@ public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
+        //RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
 
         MatrixStack matrices = context.getMatrices();
-        //drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
         renderProgressArrow(matrices, x, y);
         //energyInfoArea.draw(matrices);
@@ -42,9 +42,17 @@ public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
     }
 
 
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        //renderBackground(matrices);
-        //super.render(matrices, mouseX, mouseY, delta);
-        //drawMouseoverTooltip(matrices, mouseX, mouseY);
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context);
+        super.render(context, mouseX, mouseY, delta);
+        drawMouseoverTooltip(context, mouseX, mouseY);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        // Center the title
+        titleX = (backgroundWidth - textRenderer.getWidth(title)) / 2;
     }
 }
