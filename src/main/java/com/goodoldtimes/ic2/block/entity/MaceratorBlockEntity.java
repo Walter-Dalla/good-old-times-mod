@@ -2,88 +2,96 @@ package com.goodoldtimes.ic2.block.entity;
 
 import com.goodoldtimes.Block.Entity.ImplementedInventory;
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
-import com.goodoldtimes.GoodOldTimesMod;
+import com.goodoldtimes.ic2.Crafts.MaceratorCrafts;
 import com.goodoldtimes.ic2.Screen.MaceratorScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.registry.Registries;
+import net.minecraft.resource.ResourceManager;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import net.minecraft.inventory.Inventories;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     protected final PropertyDelegate propertyDelegate;
-     public static final String BLOCK_ID = "macerator_block_entity";
-    public static final BooleanProperty onRunning = BooleanProperty.of("onRunning");
-
-    public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_" + BLOCK_ID);
-    private int progress = 0;
-    private int maxProgress = 0;
-    private int fuelTime = 0;
-    private int maxFuelTime = 0;
-    public int number = 0;
+    public static final int PROPERTY_DELEGATE_SIZE = 4;
+    private int progress_nbt = 0;
+    private int maxProgress = 20;
+    private int energy_nbt = 0;
+    private int maxEnergy = 100;
 
 
+    protected final int INPUT_SLOT = 0;
+    protected final int OUTPUT_SLOT = 1;
+    protected final int ENERGY_SLOT = 2;
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(onRunning);
-    }
+    public static final int PROGRESS_INDEX_PROPERTY_DELEGATE = 0;
+    public static final int MAX_PROGRESS_INDEX_PROPERTY_DELEGATE = 1;
+    public static final int ENERGY_INDEX_PROPERTY_DELEGATE = 2;
+    public static final int MAX_ENERGY_INDEX_PROPERTY_DELEGATE = 3;
 
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        LOGGER.info("MaceratorBlockEntity - client");
-        return new MaceratorBlockEntity(pos, state);
-    }
+    public static final String BLOCK_ID = "macerator_block_entity";
+
+    public static final List<Item> VALID_CRAFT_INGREDIENT = MaceratorCrafts.VALID_CRAFT_INGREDIENT;
+    public static final List<Item> VALID_ENERGY_INGREDIENT = MaceratorCrafts.VALID_ENERGY_INGREDIENT;
 
     public MaceratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.MACERATOR, pos, state);
-        LOGGER.info("MaceratorBlockEntity");
+
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
-                switch (index) {
-                    case 0:
-                        return MaceratorBlockEntity.this.progress;
-                    case 1:
-                        return MaceratorBlockEntity.this.maxProgress;
-                    default:
-                        return 0;
-                }
+                return switch (index) {
+                    case PROGRESS_INDEX_PROPERTY_DELEGATE -> MaceratorBlockEntity.this.progress_nbt;
+                    case MAX_PROGRESS_INDEX_PROPERTY_DELEGATE -> MaceratorBlockEntity.this.maxProgress;
+                    case ENERGY_INDEX_PROPERTY_DELEGATE -> MaceratorBlockEntity.this.energy_nbt;
+                    case MAX_ENERGY_INDEX_PROPERTY_DELEGATE -> MaceratorBlockEntity.this.maxEnergy;
+                    default -> throw new IndexOutOfBoundsException(BLOCK_ID + ":propertyDelegate");
+                };
             }
 
             public void set(int index, int value) {
                 switch (index) {
-                    case 0:
-                        MaceratorBlockEntity.this.progress = value;
+                    case PROGRESS_INDEX_PROPERTY_DELEGATE:
+                        MaceratorBlockEntity.this.progress_nbt = value;
                         break;
-                    case 1:
+                    case MAX_PROGRESS_INDEX_PROPERTY_DELEGATE:
                         MaceratorBlockEntity.this.maxProgress = value;
                         break;
+                    case ENERGY_INDEX_PROPERTY_DELEGATE:
+                        MaceratorBlockEntity.this.energy_nbt = value;
+                        break;
+                    case MAX_ENERGY_INDEX_PROPERTY_DELEGATE:
+                        MaceratorBlockEntity.this.maxEnergy = value;
+                        break;
+                    default:
+                        throw new IndexOutOfBoundsException(BLOCK_ID + ":propertyDelegate");
                 }
             }
 
             public int size() {
-                return 2;
+                return PROPERTY_DELEGATE_SIZE;
             }
         };
     }
@@ -109,69 +117,133 @@ public class MaceratorBlockEntity extends BlockEntity implements ExtendedScreenH
             return;
         }
 
-        if(hasRecipe(entity)){
-            entity.progress++;
-            markDirty(world, blockPos, blockState);
+        tickBlock(world, blockPos, blockState, entity);
+    }
 
-            if(entity.progress >= entity.maxProgress){
-                craftItem(entity);
-            }
-            else {
-                entity.resetProgress();
-                markDirty(world, blockPos, blockState);
-            }
+    private static void tickBlock(World world, BlockPos blockPos, BlockState blockState, MaceratorBlockEntity entity){
+        var maskDirtyFlag = false;
+
+        if(hasNewFuel(entity)){
+            addFuel(entity);
+            maskDirtyFlag = true;
         }
 
+        var outputItem = hasRecipe(entity);
+
+        if(outputItem != null){
+            if(entity.progress_nbt >= entity.maxProgress){
+                craftItem(entity, outputItem);
+                entity.resetProgress();
+            }
+            else {
+                if(HasEnergy(entity)){
+                    return;
+                }
+
+                MakeProgress(entity);
+                ConsumeEnergy(entity);
+            }
+
+            maskDirtyFlag = true;
+        }
+
+        if(maskDirtyFlag){
+            markDirty(world, blockPos, blockState);
+        }
+    }
+    private static boolean HasEnergy(MaceratorBlockEntity entity){
+        return entity.energy_nbt <= 0;
+    }
+    private static void MakeProgress(MaceratorBlockEntity entity){
+        entity.progress_nbt++;
+    }
+
+    private static void ConsumeEnergy(MaceratorBlockEntity entity){
+        entity.energy_nbt--;
+    }
+
+
+
+    private static void addFuel(MaceratorBlockEntity entity){
+        entity.removeStack(entity.ENERGY_SLOT, 1);
+        entity.energy_nbt++;
     }
 
     private void resetProgress(){
-        progress = 0;
+        progress_nbt = 0;
     }
-    private static void craftItem(MaceratorBlockEntity entity){
-        SimpleInventory inventory = new SimpleInventory(entity.size());
+    private static void craftItem(MaceratorBlockEntity entity, Item outputItem){
 
-        for(int i = 0; i < entity.size(); i++){
-            inventory.setStack(i, entity.getStack(1));
+        entity.removeStack(entity.INPUT_SLOT, 1);
+        entity.setStack(entity.OUTPUT_SLOT, new ItemStack(outputItem, entity.getStack(1).getCount()+1));
+
+    }
+    public static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger("MOD_ID");
+    private static Item hasRecipe(MaceratorBlockEntity entity){
+        var inputItem = hasCraftIngredientItemInSlot(entity, entity.INPUT_SLOT);
+
+        var outputItem = MaceratorCrafts.GetCrafts().getOrDefault(inputItem, null);
+
+        if(outputItem == null &&
+                canInsertAmountIntoOutputSlot(entity) && canInsertItemIntoOutputSlot(entity, outputItem)){
+            return null;
         }
 
-        if(hasRecipe(entity)){
-            entity.removeStack(1, 1);
-            entity.setStack(2, new ItemStack(Items.RAW_IRON, entity.getStack(2).getCount()+1));
-        }
+        return outputItem;
     }
 
-    private static boolean hasRecipe(MaceratorBlockEntity entity){
-        SimpleInventory inventory = new SimpleInventory(entity.size());
-
-        for(int i = 0; i < entity.size(); i++){
-            inventory.setStack(i, entity.getStack(1));
+    private static boolean hasNewFuel(MaceratorBlockEntity entity){
+        var needFuel = entity.energy_nbt < entity.maxEnergy;
+        if(!needFuel){
+            return false;
         }
 
-        boolean hasMacenerableItemInFirstSlot = entity.getStack(1).getItem() == Items.IRON_ORE.asItem();
+        var hasValidFuel = false;
+        for(var energyItem: entity.VALID_ENERGY_INGREDIENT){
+            if(energyItem == entity.getStack(entity.ENERGY_SLOT).getItem()){
+                hasValidFuel = true;
+                break;
+            }
+        }
 
-        return hasMacenerableItemInFirstSlot && canInsertAmountIntoOutputSlot(inventory, 1)
-                && canInsertItemIntoOutputSlot(inventory, Items.IRON_ORE.asItem());
+        return hasValidFuel;
     }
 
-    private static boolean canInsertAmountIntoOutputSlot(SimpleInventory inventory, int count) {
-        return inventory.getStack(2).getItem().getMaxCount() > inventory.getStack(2).getCount() + count;
+    private static Item hasCraftIngredientItemInSlot(MaceratorBlockEntity entity, int craftSlotIndex){
+        Item outputItem = null;
+
+        for(var validItem : entity.VALID_CRAFT_INGREDIENT){
+            if(entity.getStack(craftSlotIndex).getItem() == validItem){
+                outputItem = validItem;
+                break;
+            }
+        }
+
+        return outputItem;
     }
 
-    private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
-        return inventory.getStack(2).getItem() == output || inventory.getStack(2).isEmpty();
+    private static boolean canInsertAmountIntoOutputSlot(MaceratorBlockEntity entity) {
+
+        return entity.getStack(entity.OUTPUT_SLOT).getMaxCount() > entity.getStack(entity.OUTPUT_SLOT).getCount();
+    }
+
+    private static boolean canInsertItemIntoOutputSlot(MaceratorBlockEntity entity, Item output) {
+        return entity.getStack(entity.OUTPUT_SLOT).getItem() == output || entity.getStack(entity.OUTPUT_SLOT).isEmpty();
     }
     @Override
     protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("macerator_block.progress", progress);
+        nbt.putInt("macerator_block.progress", progress_nbt);
+        nbt.putInt("macerator_block.energy", energy_nbt);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("macerator_block.progress");
+        progress_nbt = nbt.getInt("macerator_block.progress");
+        energy_nbt = nbt.getInt("macerator_block.energy");
 
     }
 

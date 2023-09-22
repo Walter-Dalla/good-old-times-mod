@@ -19,6 +19,6 @@ public class ModScreenHandler
     public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_mod_screen_handler");
 
     public static void registerAllScreenHandler(){
-        LOGGER.info("Registering Screen Handlers for " +GoodOldTimesMod.MOD_ID);
+        LOGGER.info("Registering Screen Handlers for " + GoodOldTimesMod.MOD_ID);
     }
 }

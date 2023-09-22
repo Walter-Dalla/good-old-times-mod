@@ -6,6 +6,7 @@
     "west": "good-old-times:block/machine_block_west_default",
     "east": "good-old-times:block/machine_block_east_default",
     "up": "good-old-times:block/macerator_block_up_off",
-    "down": "good-old-times:block/machine_block_down_default"
+    "down": "good-old-times:block/machine_block_down_default",
+    "particle": "good-old-times:block/machine_block_south_default"
   }
 }

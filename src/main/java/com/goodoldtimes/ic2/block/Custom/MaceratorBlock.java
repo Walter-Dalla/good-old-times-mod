@@ -25,33 +25,25 @@ import org.slf4j.LoggerFactory;
 
 public class MaceratorBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final String BLOCK_ID = "macerator_block";
-    public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_" + BLOCK_ID);
 
     public MaceratorBlock(Settings settings) {
         super(settings);
-        LOGGER.info("MaceratorBlock");
-        System.out.println("This is a message for development.");
     }
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-
-        LOGGER.info("MaceratorBlock");
-        System.out.println("This is a message for development.");
     }
 
     /* BLOCK ENTITY */
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        LOGGER.info("OnReplaced");
-
+        state = world.getBlockState(pos);
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MaceratorBlockEntity) {
                 ItemScatterer.spawn(world, pos, (MaceratorBlockEntity)blockEntity);
-                // update comparators
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -73,40 +65,18 @@ public class MaceratorBlock extends BlockWithEntity implements BlockEntityProvid
         return ActionResult.SUCCESS;
     }
 
-
-    //@Override
-    public ActionResult onUse2(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        LOGGER.info("OnUse");
-
-        if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, pos);
-
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
-            }
-        }
-        return ActionResult.SUCCESS;
-    }
-
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        LOGGER.info("createBlockEntity");
-
         return new MaceratorBlockEntity(pos, state);
     }
     @Override
     public BlockRenderType getRenderType(BlockState state) {
-        LOGGER.info("getRenderType");
-
-        //With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
         return BlockRenderType.MODEL;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        LOGGER.info("getTicker");
-
         return checkType(type, ModBlockEntities.MACERATOR, MaceratorBlockEntity::tick);
     }
 }
