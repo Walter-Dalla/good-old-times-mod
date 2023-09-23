@@ -31,6 +31,6 @@ public class MaceratorBlockEntity extends MachineBlockEntity {
     public static final List<Item> VALID_ENERGY_INGREDIENT = MaceratorCrafts.VALID_ENERGY_INGREDIENT;
 
     public MaceratorBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, ModBlockEntities.MACERATOR, BLOCK_ID);
+        super(pos, state/* ModBlockEntities.MACERATOR, BLOCK_ID*/);
     }
 }

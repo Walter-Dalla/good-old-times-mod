@@ -23,10 +23,10 @@ import net.minecraft.util.hit.BlockHitResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MaceratorBlock extends MachineParentBlock  {
+public class MaceratorBlock extends MachineParentBlock implements BlockEntityProvider {
     public static final String BLOCK_ID = "macerator_block";
 
     public MaceratorBlock(Settings settings) {
-        super(settings, ModBlockEntities.MACERATOR, "macerator_block");
+        super(settings, BLOCK_ID);
     }
 }

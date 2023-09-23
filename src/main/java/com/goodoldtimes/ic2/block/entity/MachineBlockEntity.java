@@ -51,10 +51,10 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
     public static final List<Item> VALID_CRAFT_INGREDIENT = MaceratorCrafts.VALID_CRAFT_INGREDIENT;
     public static final List<Item> VALID_ENERGY_INGREDIENT = MaceratorCrafts.VALID_ENERGY_INGREDIENT;
 
-    public MachineBlockEntity(BlockPos pos, BlockState state, BlockEntityType<?> entity, String blockId) {
-        super(entity, pos, state);
+    public MachineBlockEntity(BlockPos pos, BlockState state/*, BlockEntityType<?> entity, String blockId*/) {
+        super(ModBlockEntities.MACERATOR, pos, state);
 
-        BLOCK_ID = blockId;
+        //BLOCK_ID = blockId;
 
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {

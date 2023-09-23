@@ -1,6 +1,7 @@
 package com.goodoldtimes.ic2.block.Custom;
 
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
+import com.goodoldtimes.GoodOldTimesMod;
 import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
@@ -21,15 +22,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class MachineParentBlock extends BlockWithEntity implements BlockEntityProvider {
+public class MachineParentBlock extends BlockWithEntity {
     public static String BLOCK_ID = "machine_parent_block";
     private static BlockEntityType<MaceratorBlockEntity> CHILD_BLOCK;
 
-    public MachineParentBlock(Settings settings, BlockEntityType<MaceratorBlockEntity> child, String blockId) {
+    public MachineParentBlock(Settings settings, String blockId) {
         super(settings);
 
         BLOCK_ID = blockId;
-        CHILD_BLOCK = child;
+        GoodOldTimesMod.LOGGER.info("->"+ModBlockEntities.MACERATOR.toString());
+
+        CHILD_BLOCK = ModBlockEntities.MACERATOR;
     }
 
     @Override

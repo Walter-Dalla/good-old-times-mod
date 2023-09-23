@@ -26,7 +26,7 @@ public class ModBlockEntities {
     public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID);
 
     public static void registerBlockEntity(){
-        LOGGER.info("Registering Block Entities");
+        LOGGER.info("Registering Block Entities"+MACERATOR.toString());
     }
 
 }

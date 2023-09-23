@@ -22,10 +22,11 @@ public class ModBlock {
         new MaceratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
 
     public static void registerModBlocks(){
-
+        GoodOldTimesMod.LOGGER.info("Registering mod blocks for: "+ MACERATOR.toString());
     }
 
     private static Block registerBlock(String name, Block block, ItemGroup tab){
+        GoodOldTimesMod.LOGGER.info("Registering block "+ name);
 
         registerBlockItem(name, block, tab);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModBlock::addItemsToIngredientTabItemGroup);
