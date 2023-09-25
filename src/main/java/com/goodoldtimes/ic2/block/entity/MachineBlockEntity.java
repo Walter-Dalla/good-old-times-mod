@@ -2,7 +2,7 @@ package com.goodoldtimes.ic2.block.entity;
 
 import com.goodoldtimes.Block.Entity.ImplementedInventory;
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
-import com.goodoldtimes.ic2.Crafts.MachineCrafts;
+import com.goodoldtimes.ic2.Crafts.ParentMachineCrafts;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -168,9 +168,9 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
 
         var itemOnEnergySlot = entity.getStack(entity.ENERGY_SLOT).getItem();
 
-        for(var energyItem: MachineCrafts.GetValidEnergyIngredient()){
+        for(var energyItem: ParentMachineCrafts.GetValidEnergyIngredient()){
             if(itemOnEnergySlot == energyItem){
-                return MachineCrafts.GetItemToEnergyConvertor(itemOnEnergySlot);
+                return ParentMachineCrafts.GetItemToEnergyConvertor(itemOnEnergySlot);
             }
         }
 

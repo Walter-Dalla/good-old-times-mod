@@ -6,7 +6,7 @@ import net.minecraft.item.Items;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MachineCrafts {
+public class ParentMachineCrafts {
 
     public static ArrayList<Item> GetValidEnergyIngredient (){
         return new ArrayList<>(GetItemToEnergyConvertor().keySet());
