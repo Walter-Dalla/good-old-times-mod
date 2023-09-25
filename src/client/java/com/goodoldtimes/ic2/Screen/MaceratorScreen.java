@@ -9,8 +9,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
 
@@ -18,8 +16,6 @@ public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
             new Identifier(GoodOldTimesMod.MOD_ID, "textures/gui/macerator_gui.png");
 
     public static final String BLOCK_ID = "macerator_screen";
-    public static final Logger LOGGER = LoggerFactory.getLogger(GoodOldTimesMod.MOD_ID + "_" + BLOCK_ID);
-
     public MaceratorScreen(MaceratorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
@@ -36,22 +32,9 @@ public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
         MatrixStack matrices = context.getMatrices();
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        LOGGER.info((x + 59) +"-"+ (y + 37));
         context.drawTexture(TEXTURE, x + 56, y + 36, 176, 0, 14, handler.getScaledEnergy());
         context.drawTexture(TEXTURE, x + 79, y + 34, 176, 14,  handler.getScaledProgress(),14);
-
-
-        //renderProgressArrow(matrices, x, y);
-        //energyInfoArea.draw(matrices);
     }
-
-    /*private void (MatrixStack matrices, int x, int y) {
-        if(handler.isCrafting()) {
-            //context.drawTexture(matrices, x + 105, y + 33, 176, 0, 8, handler.getScaledProgress());
-        }
-    }
-
-     */
 
 
     @Override

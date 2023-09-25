@@ -20,10 +20,9 @@ public class GoodOldTimesMod implements ModInitializer {
 
 		ModItems.registerModItems();
 
+		ModBlockEntities.registerBlockEntity();
 
 		ModBlock.registerModBlocks();
-
-		ModBlockEntities.registerBlockEntity();
 
 		ModScreenHandler.registerAllScreenHandler();
 

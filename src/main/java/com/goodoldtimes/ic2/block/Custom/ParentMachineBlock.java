@@ -1,13 +1,11 @@
 package com.goodoldtimes.ic2.block.Custom;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,10 +22,12 @@ import org.jetbrains.annotations.Nullable;
 public class ParentMachineBlock extends BlockWithEntity implements BlockEntityProvider {
 
     public static String BLOCK_ID = "parent_machine_block";
+    public static BlockEntityType<MaceratorBlockEntity> CHILD_ENTITY;
 
-    public ParentMachineBlock(Settings settings, String blockId) {
+    public ParentMachineBlock(Settings settings, String blockId, BlockEntityType<MaceratorBlockEntity> childEntity) {
         super(settings);
         BLOCK_ID = blockId;
+        CHILD_ENTITY=childEntity;
     }
 
     @Override
@@ -72,11 +72,5 @@ public class ParentMachineBlock extends BlockWithEntity implements BlockEntityPr
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.MACERATOR, MaceratorBlockEntity::tick);
     }
 }

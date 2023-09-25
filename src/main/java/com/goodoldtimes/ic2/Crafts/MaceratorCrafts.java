@@ -9,19 +9,21 @@ public class MaceratorCrafts {
 
     private static final HashMap<Item, Item> CRAFTS = new HashMap<Item, Item>();
 
-    public static final List<Item> VALID_CRAFT_INGREDIENT = new ArrayList<>(CRAFTS.keySet());;
+    public static HashMap<Item, Item> GetCrafts(){
+        AddMaceratorCrafts();
 
-    public static final List<Item> VALID_ENERGY_INGREDIENT = new ArrayList<>(
-            Collections.singletonList(Items.REDSTONE.asItem())
-    );
+        VALID_CRAFT_INGREDIENT = new ArrayList<>(
+            CRAFTS.keySet()
+        );
 
-    public MaceratorCrafts() {
-        CRAFTS.put(Items.IRON_ORE, Items.RAW_IRON);
-        CRAFTS.put(Items.GOLD_ORE, Items.RAW_GOLD);
+        return CRAFTS;
     }
 
-    public static HashMap<Item, Item> GetCrafts(){
-        return CRAFTS;
+    public static List<Item> VALID_CRAFT_INGREDIENT = new ArrayList<>();
+
+    public static void AddMaceratorCrafts() {
+        CRAFTS.put(Items.IRON_ORE, Items.RAW_IRON);
+        CRAFTS.put(Items.GOLD_ORE, Items.RAW_GOLD);
     }
 
 }
