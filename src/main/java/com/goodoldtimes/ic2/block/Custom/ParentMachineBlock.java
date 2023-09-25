@@ -38,12 +38,12 @@ public class ParentMachineBlock extends BlockWithEntity implements BlockEntityPr
     /* BLOCK ENTITY */
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        state = world.getBlockState(pos);
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved){
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof MaceratorBlockEntity) {
                 ItemScatterer.spawn(world, pos, (MaceratorBlockEntity)blockEntity);
+                // update comparators
                 world.updateComparators(pos,this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -73,4 +73,6 @@ public class ParentMachineBlock extends BlockWithEntity implements BlockEntityPr
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
     }
+
+
 }

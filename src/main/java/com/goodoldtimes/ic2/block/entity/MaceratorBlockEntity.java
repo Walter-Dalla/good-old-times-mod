@@ -20,7 +20,7 @@ public class MaceratorBlockEntity extends MachineBlockEntity {
     public static final List<Item> VALID_CRAFT_INGREDIENT = MaceratorCrafts.VALID_CRAFT_INGREDIENT;
 
     public MaceratorBlockEntity(BlockPos pos, BlockState state) {
-        super(pos, state, GetBlockEntityCrafts(), new MachineBlockEntityProcessData(0, 1200, 0, 800, 2));
+        super(pos, state, GetBlockEntityCrafts(), new MachineBlockEntityProcessData(0, 400, 0, 800, 2));
     }
 
     protected static HashMap<Item, Item> GetBlockEntityCrafts() {
@@ -32,5 +32,6 @@ public class MaceratorBlockEntity extends MachineBlockEntity {
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new MaceratorScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
+
 
 }
