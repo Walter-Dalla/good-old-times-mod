@@ -1,6 +1,7 @@
 package com.goodoldtimes;
 
 import com.goodoldtimes.ic2.Screen.ElectricFurnaceScreen;
+import com.goodoldtimes.ic2.Screen.ElectricFurnaceScreenHandler;
 import com.goodoldtimes.ic2.Screen.MaceratorScreen;
 import com.goodoldtimes.Screen.ModScreenHandler;
 import net.fabricmc.api.ClientModInitializer;
