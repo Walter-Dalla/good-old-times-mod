@@ -1,5 +1,8 @@
 package com.goodoldtimes;
 
+import com.goodoldtimes.Block.Entity.ModBlockEntities;
+import com.goodoldtimes.Screen.ModScreenHandler;
+import com.goodoldtimes.Block.ModBlock;
 import com.goodoldtimes.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -13,12 +16,16 @@ public class GoodOldTimesMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+		LOGGER.info("Start loading...");
 
 		ModItems.registerModItems();
 
-		LOGGER.info("Hello Fabric world!");
+		ModBlockEntities.registerBlockEntity();
+
+		ModBlock.registerModBlocks();
+
+		ModScreenHandler.registerAllScreenHandler();
+
+		LOGGER.info("Finish loading...");
 	}
 }
