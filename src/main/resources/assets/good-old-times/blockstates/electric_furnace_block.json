@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": {
+      "model": "good-old-times:block/electric_furnace_block"
+    },
+    "onRunning=false": { "model": "good-old-times:block/macerator_block_off" },
+    "onRunning=true": { "model": "good-old-times:block/macerator_block_on" }
+  }
+}

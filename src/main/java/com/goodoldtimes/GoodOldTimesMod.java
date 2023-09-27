@@ -1,7 +1,7 @@
 package com.goodoldtimes;
 
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
-import com.goodoldtimes.ic2.Screen.ModScreenHandler;
+import com.goodoldtimes.Screen.ModScreenHandler;
 import com.goodoldtimes.Block.ModBlock;
 import com.goodoldtimes.item.ModItems;
 import net.fabricmc.api.ModInitializer;

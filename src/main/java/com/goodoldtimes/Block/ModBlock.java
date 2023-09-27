@@ -1,6 +1,7 @@
 package com.goodoldtimes.Block;
 
 import com.goodoldtimes.GoodOldTimesMod;
+import com.goodoldtimes.ic2.block.Custom.ElectricFurnaceBlock;
 import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
@@ -20,6 +21,8 @@ import net.minecraft.util.Identifier;
 public class ModBlock {
     public static final Block MACERATOR = registerBlock(MaceratorBlock.BLOCK_ID,
         new MaceratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
+    public static final Block ELECTRIC_FURNACE = registerBlock(ElectricFurnaceBlock.BLOCK_ID,
+            new ElectricFurnaceBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
 
     public static void registerModBlocks(){
 
@@ -35,6 +38,7 @@ public class ModBlock {
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(MACERATOR);
+        entries.add(ELECTRIC_FURNACE);
     }
 
     private static Item registerBlockItem(String name, Block block, ItemGroup tab){

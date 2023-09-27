@@ -7,6 +7,7 @@ import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -52,8 +53,9 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
     public static HashMap<Item, Item> CRAFTS;
 
-    public MachineBlockEntity(BlockPos pos, BlockState state, HashMap<Item, Item> crafts, MachineBlockEntityProcessData processData) {
-        super(ModBlockEntities.MACERATOR, pos, state);
+    public MachineBlockEntity(BlockPos pos, BlockState state, HashMap<Item, Item> crafts, MachineBlockEntityProcessData processData,
+                              BlockEntityType<?> modBlockEntity) {
+        super(modBlockEntity, pos, state);
 
         machineBlockEntityProcessData = processData;
 

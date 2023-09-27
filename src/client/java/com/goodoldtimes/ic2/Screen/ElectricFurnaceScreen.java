@@ -7,12 +7,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
+public class ElectricFurnaceScreen extends HandledScreen<ElectricFurnaceScreenHandler> {
 
     private static final Identifier TEXTURE =
-            new Identifier(GoodOldTimesMod.MOD_ID, "textures/gui/macerator_gui.png");
-
-    public MaceratorScreen(MaceratorScreenHandler handler, PlayerInventory inventory, Text title) {
+            new Identifier(GoodOldTimesMod.MOD_ID, "textures/gui/electric_furnace_gui.png");
+    public ElectricFurnaceScreen(ElectricFurnaceScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
 
@@ -21,8 +20,6 @@ public class MaceratorScreen extends HandledScreen<MaceratorScreenHandler> {
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         ScreenHelper.DrawBackgroundGeneric(context, width, backgroundWidth, height, backgroundHeight, TEXTURE, handler);
     }
-
-
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {

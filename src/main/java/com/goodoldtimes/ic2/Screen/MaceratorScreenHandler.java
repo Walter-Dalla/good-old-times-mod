@@ -1,5 +1,6 @@
 package com.goodoldtimes.ic2.Screen;
 
+import com.goodoldtimes.Screen.ModScreenHandler;
 import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
