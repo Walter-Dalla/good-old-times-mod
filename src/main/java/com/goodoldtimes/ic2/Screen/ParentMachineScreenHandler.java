@@ -14,7 +14,7 @@ public class ParentMachineScreenHandler  extends ScreenHandler {
     protected final Inventory inventory;
     protected final PropertyDelegate propertyDelegate;
     public static final int PROGRESS_ARROW_SIZE_DEFAULT = 26;
-    public static final int PROGRESS_BOLT_SIZE_DEFAULT = 14;
+    public int PROGRESS_BOLT_SIZE_DEFAULT = 14;
     public static final int INVENTORY_SIZE = 3;
 
     public ParentMachineScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate,

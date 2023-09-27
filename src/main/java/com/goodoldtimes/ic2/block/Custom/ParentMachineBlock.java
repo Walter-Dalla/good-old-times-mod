@@ -20,10 +20,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ParentMachineBlock extends BlockWithEntity implements BlockEntityProvider {
 
-    public static String BLOCK_ID = "parent_machine_block";
     public ParentMachineBlock(Settings settings, String blockId) {
         super(settings);
-        BLOCK_ID = blockId;
     }
 
     @Nullable

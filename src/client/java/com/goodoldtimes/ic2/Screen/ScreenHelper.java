@@ -19,7 +19,7 @@ public class ScreenHelper {
         context.drawTexture(texture, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
         context.drawTexture(texture, x + 56, y + 36, 176, 0, 14, handler.getScaledEnergy());
-        context.drawTexture(texture, x + 79, y + 34, 176, 14,  handler.getScaledProgress(),14);
+        context.drawTexture(texture, x + 79, y + 34, 176, 14,  handler.getScaledProgress(),17);
     }
 
     public static int AddCenterTitle(int backgroundWidth, TextRenderer textRenderer, Text title) {

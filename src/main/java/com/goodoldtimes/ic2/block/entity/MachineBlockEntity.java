@@ -44,22 +44,26 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
     public static final int ENERGY_INDEX_PROPERTY_DELEGATE = 2;
     public static final int MAX_ENERGY_INDEX_PROPERTY_DELEGATE = 3;
 
-    public static final String BLOCK_ID = "machine_block_entity";
+    public String BLOCK_ID = "machine_block_entity";
 
-    private static List<Item> GetValidCraftIngredients(){
+    private static List<Item> GetValidCraftIngredients(MachineBlockEntity entity){
+
+        var craftsForEntity = CRAFTS.get(entity.BLOCK_ID);
+
         return new ArrayList<>(
-            CRAFTS.keySet()
+                craftsForEntity.keySet()
         );
     }
-    public static HashMap<Item, Item> CRAFTS;
+    public static HashMap<String, HashMap<Item, Item>> CRAFTS = new HashMap<>();
 
     public MachineBlockEntity(BlockPos pos, BlockState state, HashMap<Item, Item> crafts, MachineBlockEntityProcessData processData,
-                              BlockEntityType<?> modBlockEntity) {
+                              BlockEntityType<?> modBlockEntity, String blockId) {
         super(modBlockEntity, pos, state);
 
         machineBlockEntityProcessData = processData;
+        BLOCK_ID = blockId;
+        CRAFTS.put(blockId, crafts);
 
-        CRAFTS = crafts;
         this.propertyDelegate = new PropertyDelegate() {
             public int get(int index) {
                 return switch (index) {
@@ -129,7 +133,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
             maskDirtyFlag = true;
         }
 
-        var outputItem = HasRecipe(entity, CRAFTS);
+        var outputItem = HasRecipe(entity);
 
         if(outputItem != null){
             if(entity.machineBlockEntityProcessData.getProgressNbt() >= entity.machineBlockEntityProcessData.getMaxProgress()){
@@ -210,8 +214,14 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
 
     }
 
-    private static Item HasRecipe(MachineBlockEntity entity, HashMap<Item, Item> crafts){
+    private static Item HasRecipe(MachineBlockEntity entity){
         var inputItem = HasCraftIngredientItemInSlot(entity, entity.INPUT_SLOT);
+
+        var crafts = entity.CRAFTS.getOrDefault(entity.BLOCK_ID, null);
+        if(crafts == null){
+            return null;
+        }
+
         var outputItem = crafts.getOrDefault(inputItem, null);
 
         var canInsertAmountIntoOutputSlot = CanInsertAmountIntoOutputSlot(entity);
@@ -229,7 +239,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
 
     private static Item HasCraftIngredientItemInSlot(MachineBlockEntity entity, int craftSlotIndex){
         Item inputItem = null;
-        for(var validItem : entity.GetValidCraftIngredients()){
+        for(var validItem : entity.GetValidCraftIngredients(entity)){
 
             if(entity.getStack(craftSlotIndex).getItem() == validItem){
                 inputItem = validItem;
