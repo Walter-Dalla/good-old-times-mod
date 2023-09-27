@@ -1,6 +1,7 @@
 package com.goodoldtimes.Block;
 
 import com.goodoldtimes.GoodOldTimesMod;
+import com.goodoldtimes.ic2.block.Custom.CompressorBlock;
 import com.goodoldtimes.ic2.block.Custom.ElectricFurnaceBlock;
 import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -23,6 +24,8 @@ public class ModBlock {
         new MaceratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
     public static final Block ELECTRIC_FURNACE = registerBlock(ElectricFurnaceBlock.BLOCK_ID,
             new ElectricFurnaceBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
+    public static final Block COMPRESSOR = registerBlock(CompressorBlock.BLOCK_ID,
+            new CompressorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
 
     public static void registerModBlocks(){
 
@@ -39,6 +42,7 @@ public class ModBlock {
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
         entries.add(MACERATOR);
         entries.add(ELECTRIC_FURNACE);
+        entries.add(COMPRESSOR);
     }
 
     private static Item registerBlockItem(String name, Block block, ItemGroup tab){

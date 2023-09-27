@@ -2,10 +2,13 @@ package com.goodoldtimes.Block.Entity;
 
 import com.goodoldtimes.Block.ModBlock;
 import com.goodoldtimes.GoodOldTimesMod;
+import com.goodoldtimes.ic2.block.Custom.CompressorBlock;
 import com.goodoldtimes.ic2.block.Custom.ElectricFurnaceBlock;
 import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
+import com.goodoldtimes.ic2.block.entity.CompressorBlockEntity;
 import com.goodoldtimes.ic2.block.entity.ElectricFurnaceBlockEntity;
 import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
+import com.goodoldtimes.ic2.block.entity.MachineBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
@@ -14,6 +17,13 @@ import net.minecraft.util.Identifier;
 
 
 public class ModBlockEntities {
+    public static final BlockEntityType<CompressorBlockEntity> COMPRESSOR = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            new Identifier(GoodOldTimesMod.MOD_ID, CompressorBlock.BLOCK_ID+"_entity"),
+            FabricBlockEntityTypeBuilder.create(CompressorBlockEntity::new,
+                            ModBlock.COMPRESSOR)
+                    .build(null)
+    );;
     public static BlockEntityType<MaceratorBlockEntity> MACERATOR =
         Registry.register(
             Registries.BLOCK_ENTITY_TYPE,

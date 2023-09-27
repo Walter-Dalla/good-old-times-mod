@@ -2,6 +2,7 @@ package com.goodoldtimes.ic2.block.Custom;
 
 import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
+import com.goodoldtimes.ic2.block.entity.MachineBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;

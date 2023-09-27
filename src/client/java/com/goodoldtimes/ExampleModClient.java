@@ -1,5 +1,6 @@
 package com.goodoldtimes;
 
+import com.goodoldtimes.ic2.Screen.CompressorScreen;
 import com.goodoldtimes.ic2.Screen.ElectricFurnaceScreen;
 import com.goodoldtimes.ic2.Screen.ElectricFurnaceScreenHandler;
 import com.goodoldtimes.ic2.Screen.MaceratorScreen;
@@ -13,5 +14,6 @@ public class ExampleModClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		HandledScreens.register(ModScreenHandler.MACERATOR_SCREEN_HANDLER, MaceratorScreen::new);
 		HandledScreens.register(ModScreenHandler.ELECTRIC_FURNACE_SCREEN_HANDLER, ElectricFurnaceScreen::new);
+		HandledScreens.register(ModScreenHandler.COMPRESSOR_SCREEN_HANDLER, CompressorScreen::new);
 	}
 }

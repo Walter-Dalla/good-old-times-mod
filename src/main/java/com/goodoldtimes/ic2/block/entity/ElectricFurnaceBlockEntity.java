@@ -23,7 +23,8 @@ public class ElectricFurnaceBlockEntity extends MachineBlockEntity {
                 0,
                 800,
             2),
-            ModBlockEntities.ELECTRIC_FURNACE);
+        ModBlockEntities.ELECTRIC_FURNACE,
+        "electric_furnace_block_entity");
     }
 
     protected static HashMap<Item, Item> GetBlockEntityCrafts() {
