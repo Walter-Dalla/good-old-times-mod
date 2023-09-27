@@ -19,9 +19,9 @@ public class ElectricFurnaceBlockEntity extends MachineBlockEntity {
     public ElectricFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(pos, state, GetBlockEntityCrafts(),
             new MachineBlockEntityProcessData(0,
-            400,
-            0,
-            800,
+                400,
+                0,
+                800,
             2),
             ModBlockEntities.ELECTRIC_FURNACE);
     }

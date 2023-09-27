@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class MaceratorBlock extends ParentMachineBlock  {
+public class MaceratorBlock extends ParentMachineBlock {
     public static final String BLOCK_ID = "macerator_block";
 
     public MaceratorBlock(Settings settings) {

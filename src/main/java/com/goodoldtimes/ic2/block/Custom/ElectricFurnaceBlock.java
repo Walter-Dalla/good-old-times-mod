@@ -17,11 +17,6 @@ public class ElectricFurnaceBlock extends ParentMachineBlock  {
         super(settings, BLOCK_ID);
     }
 
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ElectricFurnaceBlockEntity(pos, state);
-    }
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
