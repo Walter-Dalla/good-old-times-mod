@@ -3,6 +3,7 @@ package com.goodoldtimes.Block;
 import com.goodoldtimes.GoodOldTimesMod;
 import com.goodoldtimes.ic2.block.Custom.CompressorBlock;
 import com.goodoldtimes.ic2.block.Custom.ElectricFurnaceBlock;
+import com.goodoldtimes.ic2.block.Custom.ExtractorBlock;
 import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
@@ -26,7 +27,8 @@ public class ModBlock {
         ListOfBlocks = new ArrayList<>(
                 List.of(CompressorBlock.BLOCK,
                         ElectricFurnaceBlock.BLOCK,
-                        MaceratorBlock.BLOCK
+                        MaceratorBlock.BLOCK,
+                        ExtractorBlock.BLOCK
                 )
         );
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModBlock::addItemsToIngredientTabItemGroup);
