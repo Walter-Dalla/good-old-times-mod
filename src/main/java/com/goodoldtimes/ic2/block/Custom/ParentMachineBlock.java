@@ -1,17 +1,22 @@
 package com.goodoldtimes.ic2.block.Custom;
 
+import com.goodoldtimes.Block.ModBlock;
+import com.goodoldtimes.GoodOldTimesMod;
 import com.goodoldtimes.ic2.block.entity.MachineBlockEntity;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +27,16 @@ public class ParentMachineBlock extends BlockWithEntity implements BlockEntityPr
 
     public ParentMachineBlock(Settings settings, String blockId) {
         super(settings);
+    }
+
+    protected static<T extends BlockEntity> BlockEntityType<?> registerBlockEntity(String blockId, Block block, FabricBlockEntityTypeBuilder.Factory<? extends T> factory){
+        return Registry.register(
+                Registries.BLOCK_ENTITY_TYPE,
+                new Identifier(GoodOldTimesMod.MOD_ID, blockId+"_entity"),
+                FabricBlockEntityTypeBuilder.create(factory,
+                                block)
+                        .build(null)
+        );
     }
 
     @Nullable
@@ -71,5 +86,11 @@ public class ParentMachineBlock extends BlockWithEntity implements BlockEntityPr
         return BlockRenderType.MODEL;
     }
 
+    protected static FabricBlockSettings blockSettings(){
+        return FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque();
+    }
 
+    public static Block registerBlock(String blockId, Block block){
+        return ModBlock.registerBlock(blockId, block);
+    }
 }

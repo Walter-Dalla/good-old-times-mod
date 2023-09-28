@@ -1,7 +1,6 @@
 package com.goodoldtimes.ic2.block.entity;
 
 import com.goodoldtimes.Block.Entity.ImplementedInventory;
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.Crafts.ParentMachineCrafts;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;

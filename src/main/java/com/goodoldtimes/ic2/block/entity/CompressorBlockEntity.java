@@ -1,10 +1,9 @@
 package com.goodoldtimes.ic2.block.entity;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.Crafts.CompressorCrafts;
 import com.goodoldtimes.ic2.Screen.CompressorScreenHandler;
+import com.goodoldtimes.ic2.block.Custom.CompressorBlock;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
-import net.fabricmc.fabric.api.blockview.v2.RenderDataBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,7 +23,7 @@ public class CompressorBlockEntity extends MachineBlockEntity {
                     0,
                     800,
                     2),
-        ModBlockEntities.COMPRESSOR,
+        CompressorBlock.ENTITY,
         "compressor_block_entity");
 }
 

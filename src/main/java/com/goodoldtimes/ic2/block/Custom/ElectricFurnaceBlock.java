@@ -1,8 +1,7 @@
 package com.goodoldtimes.ic2.block.Custom;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
-import com.goodoldtimes.ic2.block.entity.CompressorBlockEntity;
 import com.goodoldtimes.ic2.block.entity.ElectricFurnaceBlockEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -13,7 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class ElectricFurnaceBlock extends ParentMachineBlock  {
     public static final String BLOCK_ID = "electric_furnace_block";
-
+    public static final Block BLOCK = registerBlock(BLOCK_ID, new ElectricFurnaceBlock(blockSettings()));
+    public static final BlockEntityType<ElectricFurnaceBlockEntity> ENTITY =
+            (BlockEntityType<ElectricFurnaceBlockEntity>) registerBlockEntity(BLOCK_ID, BLOCK, ElectricFurnaceBlockEntity::new);
     public ElectricFurnaceBlock(Settings settings) {
         super(settings, BLOCK_ID);
     }
@@ -21,7 +22,7 @@ public class ElectricFurnaceBlock extends ParentMachineBlock  {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.ELECTRIC_FURNACE, ElectricFurnaceBlockEntity::tick);
+        return checkType(type, ENTITY, ElectricFurnaceBlockEntity::tick);
     }
 
     @Override

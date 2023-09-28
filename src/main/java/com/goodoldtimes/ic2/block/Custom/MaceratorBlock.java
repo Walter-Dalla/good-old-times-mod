@@ -1,8 +1,7 @@
 package com.goodoldtimes.ic2.block.Custom;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.block.entity.MaceratorBlockEntity;
-import com.goodoldtimes.ic2.block.entity.MachineBlockEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -13,7 +12,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class MaceratorBlock extends ParentMachineBlock {
     public static final String BLOCK_ID = "macerator_block";
-
+    public static final Block BLOCK = registerBlock(BLOCK_ID, new MaceratorBlock(blockSettings()));
+    public static final BlockEntityType<MaceratorBlockEntity> ENTITY =
+            (BlockEntityType<MaceratorBlockEntity>) registerBlockEntity(BLOCK_ID, BLOCK, MaceratorBlockEntity::new);
     public MaceratorBlock(Settings settings) {
         super(settings, BLOCK_ID);
     }
@@ -26,6 +27,6 @@ public class MaceratorBlock extends ParentMachineBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, ModBlockEntities.MACERATOR, MaceratorBlockEntity::tick);
+        return checkType(type, ENTITY, MaceratorBlockEntity::tick);
     }
 }

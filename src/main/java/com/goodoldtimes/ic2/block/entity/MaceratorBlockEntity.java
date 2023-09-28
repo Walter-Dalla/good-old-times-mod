@@ -1,8 +1,8 @@
 package com.goodoldtimes.ic2.block.entity;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.Crafts.MaceratorCrafts;
 import com.goodoldtimes.ic2.Screen.MaceratorScreenHandler;
+import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.List;
 
 
 public class MaceratorBlockEntity extends MachineBlockEntity {
@@ -25,7 +24,7 @@ public class MaceratorBlockEntity extends MachineBlockEntity {
             0,
             800,
             2),
-        ModBlockEntities.MACERATOR,
+        MaceratorBlock.ENTITY,
         "macerator_block_entity");
     }
 

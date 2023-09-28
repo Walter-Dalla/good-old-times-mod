@@ -1,4 +1,7 @@
 {
   "item.good-old-times.pe_queimado": "Pé queimado",
-  "block.good-old-times.macerator_block": "Macerator"
+  "block.good-old-times.macerator_block": "Macerator",
+  "block.good-old-times.electric_furnace_block": "Electric furnace",
+  "block.good-old-times.compressor_block": "Compressor",
+  "block.good-old-times.extractor_block": "Extractor"
 }

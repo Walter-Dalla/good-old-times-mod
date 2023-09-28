@@ -1,6 +1,5 @@
 package com.goodoldtimes;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.Screen.ModScreenHandler;
 import com.goodoldtimes.Block.ModBlock;
 import com.goodoldtimes.item.ModItems;
@@ -19,8 +18,6 @@ public class GoodOldTimesMod implements ModInitializer {
 		LOGGER.info("Start loading...");
 
 		ModItems.registerModItems();
-
-		ModBlockEntities.registerBlockEntity();
 
 		ModBlock.registerModBlocks();
 
