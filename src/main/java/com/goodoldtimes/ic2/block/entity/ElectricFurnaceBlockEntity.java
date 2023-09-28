@@ -1,8 +1,8 @@
 package com.goodoldtimes.ic2.block.entity;
 
-import com.goodoldtimes.Block.Entity.ModBlockEntities;
 import com.goodoldtimes.ic2.Crafts.ElectricFurnaceCrafts;
 import com.goodoldtimes.ic2.Screen.ElectricFurnaceScreenHandler;
+import com.goodoldtimes.ic2.block.Custom.ElectricFurnaceBlock;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,7 +23,7 @@ public class ElectricFurnaceBlockEntity extends MachineBlockEntity {
                 0,
                 800,
             2),
-        ModBlockEntities.ELECTRIC_FURNACE,
+        ElectricFurnaceBlock.ENTITY,
         "electric_furnace_block_entity");
     }
 

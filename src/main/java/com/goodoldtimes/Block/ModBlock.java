@@ -7,46 +7,46 @@ import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ModBlock {
-    public static final Block MACERATOR = registerBlock(MaceratorBlock.BLOCK_ID,
-        new MaceratorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
-    public static final Block ELECTRIC_FURNACE = registerBlock(ElectricFurnaceBlock.BLOCK_ID,
-            new ElectricFurnaceBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
-    public static final Block COMPRESSOR = registerBlock(CompressorBlock.BLOCK_ID,
-            new CompressorBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()), null);
+    protected static ArrayList<Block> ListOfBlocks;
 
     public static void registerModBlocks(){
-
+        ListOfBlocks = new ArrayList<>(
+                List.of(CompressorBlock.BLOCK,
+                        ElectricFurnaceBlock.BLOCK,
+                        MaceratorBlock.BLOCK
+                )
+        );
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModBlock::addItemsToIngredientTabItemGroup);
     }
 
-    private static Block registerBlock(String name, Block block, ItemGroup tab){
+    private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
+        for(var block : ListOfBlocks) {
+            entries.add(block);
+        }
+    }
 
-        registerBlockItem(name, block, tab);
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModBlock::addItemsToIngredientTabItemGroup);
+    public static Block registerBlock(String name, Block block){
+
+        registerBlockItem(name, block);
 
         return Registry.register(Registries.BLOCK, new Identifier(GoodOldTimesMod.MOD_ID, name), block);
     }
 
-    private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
-        entries.add(MACERATOR);
-        entries.add(ELECTRIC_FURNACE);
-        entries.add(COMPRESSOR);
-    }
-
-    private static Item registerBlockItem(String name, Block block, ItemGroup tab){
+    private static Item registerBlockItem(String name, Block block){
         return Registry.register(Registries.ITEM, new Identifier(GoodOldTimesMod.MOD_ID, name),
-            new BlockItem(block, new FabricItemSettings()));
+                new BlockItem(block, new FabricItemSettings()));
     }
 }
