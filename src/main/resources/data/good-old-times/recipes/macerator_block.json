@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "CMC",
+    " E "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "M": {
+      "item": "good-old-times:machine_block"
+    },
+    "E": {
+      "item": "good-old-times:electronic_circuit"
+    }
+  },
+  "result": {
+    "item": "good-old-times:macerator_block",
+    "count": 1
+  }
+}
