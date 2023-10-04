@@ -2,6 +2,7 @@ package com.goodoldtimes.Block;
 
 import com.goodoldtimes.GoodOldTimesMod;
 import com.goodoldtimes.ic2.block.Custom.*;
+import com.goodoldtimes.ic2.block.Custom.Cable.CopperCableBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -26,7 +27,9 @@ public class ModBlock {
                         ElectricFurnaceBlock.BLOCK,
                         MaceratorBlock.BLOCK,
                         ExtractorBlock.BLOCK,
-                        MachineBlock.BLOCK
+                        MachineBlock.BLOCK,
+                        CopperCableBlock.BLOCK,
+                        GeneratorBlock.BLOCK
                 )
         );
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModBlock::addItemsToIngredientTabItemGroup);

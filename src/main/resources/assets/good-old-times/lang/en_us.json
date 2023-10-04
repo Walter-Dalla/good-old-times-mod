@@ -5,6 +5,8 @@
   "block.good-old-times.compressor_block": "Compressor",
   "block.good-old-times.extractor_block": "Extractor",
 
+  "block.good-old-times.generator_block": "Generator",
+
   "item.good-old-times.advanced_alloy": "Advanced Alloy",
   "item.good-old-times.advanced_circuit": "Advanced Circuit",
   "item.good-old-times.batpack": "Batpack",
@@ -29,7 +31,7 @@
   "item.good-old-times.compressed_plants": "Compressed Plants",
   "item.good-old-times.copper_axe": "Copper Axe",
   "item.good-old-times.copper_boots": "Copper Boots",
-  "item.good-old-times.copper_cable": "Copper Cable",
+  "item.good-old-times.copper_cable_block": "Copper Cable",
   "item.good-old-times.copper_chestplate": "Copper Chestplate",
   "item.good-old-times.copper_dust": "Copper Dust",
   "item.good-old-times.copper_helmet": "Copper Helmet",

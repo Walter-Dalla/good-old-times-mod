@@ -47,7 +47,6 @@ public class ItemList {
                 COMPRESSED_PLANTS,
                 COPPER_AXE,
                 COPPER_BOOTS,
-                COPPER_CABLE,
                 COPPER_CHESTPLATE,
                 COPPER_DUST,
                 COPPER_HELMET,
@@ -201,7 +200,6 @@ public class ItemList {
     public static final Item COMPRESSED_PLANTS = registerItem("compressed_plants", new Item(new FabricItemSettings()));
     public static final Item COPPER_AXE = registerItem("copper_axe", new Item(new FabricItemSettings()));
     public static final Item COPPER_BOOTS = registerItem("copper_boots", new Item(new FabricItemSettings()));
-    public static final Item COPPER_CABLE = registerItem("copper_cable", new Item(new FabricItemSettings()));
     public static final Item COPPER_CHESTPLATE = registerItem("copper_chestplate", new Item(new FabricItemSettings()));
     public static final Item COPPER_DUST = registerItem("copper_dust", new Item(new FabricItemSettings()));
     public static final Item COPPER_HELMET = registerItem("copper_helmet", new Item(new FabricItemSettings()));

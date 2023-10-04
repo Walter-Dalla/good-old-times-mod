@@ -122,7 +122,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
         tickBlock(world, blockPos, blockState, entity);
     }
 
-    private static void tickBlock(World world, BlockPos blockPos, BlockState blockState, MachineBlockEntity entity){
+    protected static void tickBlock(World world, BlockPos blockPos, BlockState blockState, MachineBlockEntity entity){
         var maskDirtyFlag = false;
 
         var energyValue = HasNewFuel(entity);

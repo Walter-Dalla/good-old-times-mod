@@ -33,8 +33,8 @@ public class ParentMachineBlock extends BlockWithEntity implements BlockEntityPr
         return Registry.register(
                 Registries.BLOCK_ENTITY_TYPE,
                 new Identifier(GoodOldTimesMod.MOD_ID, blockId+"_entity"),
-                FabricBlockEntityTypeBuilder.create(factory,
-                                block)
+                    FabricBlockEntityTypeBuilder.create(factory,
+                            block)
                         .build(null)
         );
     }

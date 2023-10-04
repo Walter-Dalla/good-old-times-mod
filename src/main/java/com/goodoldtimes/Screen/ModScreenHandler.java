@@ -1,14 +1,9 @@
 package com.goodoldtimes.Screen;
 
 import com.goodoldtimes.GoodOldTimesMod;
-import com.goodoldtimes.ic2.Screen.CompressorScreenHandler;
-import com.goodoldtimes.ic2.Screen.ElectricFurnaceScreenHandler;
-import com.goodoldtimes.ic2.Screen.ExtractorScreenHandler;
-import com.goodoldtimes.ic2.Screen.MaceratorScreenHandler;
-import com.goodoldtimes.ic2.block.Custom.CompressorBlock;
-import com.goodoldtimes.ic2.block.Custom.ElectricFurnaceBlock;
-import com.goodoldtimes.ic2.block.Custom.ExtractorBlock;
-import com.goodoldtimes.ic2.block.Custom.MaceratorBlock;
+import com.goodoldtimes.ic2.Screen.*;
+import com.goodoldtimes.ic2.block.Custom.*;
+import com.goodoldtimes.ic2.block.entity.GeneratorBlockEntity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -25,6 +20,10 @@ public class ModScreenHandler
     public static final ScreenHandlerType<CompressorScreenHandler> COMPRESSOR_SCREEN_HANDLER
             = Registry.register(Registries.SCREEN_HANDLER, new Identifier(GoodOldTimesMod.MOD_ID, CompressorBlock.BLOCK_ID+"_screen_handler"),
             new ExtendedScreenHandlerType<>(CompressorScreenHandler::new));
+
+    public static final ScreenHandlerType<GeneratorScreenHandler> GENERATOR_SCREEN_HANDLER
+            = Registry.register(Registries.SCREEN_HANDLER, new Identifier(GoodOldTimesMod.MOD_ID, GeneratorBlock.BLOCK_ID+"_screen_handler"),
+            new ExtendedScreenHandlerType<>(GeneratorScreenHandler::new));
     public static ScreenHandlerType<MaceratorScreenHandler> MACERATOR_SCREEN_HANDLER
             = Registry.register(Registries.SCREEN_HANDLER, new Identifier(GoodOldTimesMod.MOD_ID, MaceratorBlock.BLOCK_ID+"_screen_handler"),
             new ExtendedScreenHandlerType<>(MaceratorScreenHandler::new));

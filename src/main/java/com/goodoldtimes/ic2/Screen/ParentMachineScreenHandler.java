@@ -13,7 +13,7 @@ import net.minecraft.screen.slot.Slot;
 public class ParentMachineScreenHandler  extends ScreenHandler {
     protected final Inventory inventory;
     protected final PropertyDelegate propertyDelegate;
-    public static final int PROGRESS_ARROW_SIZE_DEFAULT = 26;
+    public int PROGRESS_ARROW_SIZE_DEFAULT = 26;
     public int PROGRESS_BOLT_SIZE_DEFAULT = 14;
     public static final int INVENTORY_SIZE = 3;
 

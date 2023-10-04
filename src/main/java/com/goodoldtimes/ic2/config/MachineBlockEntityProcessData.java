@@ -48,6 +48,8 @@ public class MachineBlockEntityProcessData {
     }
 
     public void increaseEnergy(int increase){
+        if((this.energyNbt + increase) > maxEnergy) return;
+
         this.energyNbt += increase;
     }
     public void increaseProgress(int increase){
