@@ -13,5 +13,6 @@ public class ExampleModClient implements ClientModInitializer {
 		HandledScreens.register(ModScreenHandler.ELECTRIC_FURNACE_SCREEN_HANDLER, ElectricFurnaceScreen::new);
 		HandledScreens.register(ModScreenHandler.COMPRESSOR_SCREEN_HANDLER, CompressorScreen::new);
 		HandledScreens.register(ModScreenHandler.EXTRACTOR_SCREEN_HANDLER, ExtractorScreen::new);
+		HandledScreens.register(ModScreenHandler.GENERATOR_SCREEN_HANDLER, GeneratorScreen::new);
 	}
 }

@@ -63,4 +63,19 @@ public class MachineBlockEntityProcessData {
     public void setEnergyPerTickOnCrafting(int energyPerTickOnCrafting) {
         this.energyPerTickOnCrafting = energyPerTickOnCrafting;
     }
+
+    public boolean hasEnergy() {
+        return energyNbt > 0;
+    }
+    public boolean hasEnergy(int trashHold) {
+        return energyNbt > trashHold;
+    }
+
+    public boolean hasEnergySpace() {
+        return energyNbt < maxEnergy;
+    }
+
+    public boolean hasEnergySpace(int trashHold) {
+        return energyNbt < (maxEnergy - trashHold);
+    }
 }

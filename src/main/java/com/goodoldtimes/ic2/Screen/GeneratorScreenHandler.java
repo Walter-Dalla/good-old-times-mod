@@ -19,6 +19,6 @@ public class GeneratorScreenHandler extends ParentMachineScreenHandler {
     }
 
     public GeneratorScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
-        super(syncId, playerInventory, inventory, delegate, ModScreenHandler.COMPRESSOR_SCREEN_HANDLER);
+        super(syncId, playerInventory, inventory, delegate, ModScreenHandler.GENERATOR_SCREEN_HANDLER);
     }
 }

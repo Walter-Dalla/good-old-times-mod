@@ -156,7 +156,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
         }
     }
 
-    private static boolean CanAddFuel(MachineBlockEntity entity, Integer energyValue) {
+    protected static boolean CanAddFuel(MachineBlockEntity entity, Integer energyValue) {
         if(energyValue == null){
             return false;
         }
@@ -164,7 +164,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
         return entity.machineBlockEntityProcessData.getMaxEnergy() >= entity.machineBlockEntityProcessData.getEnergyNbt() + energyValue;
     }
 
-    private static Integer HasNewFuel(MachineBlockEntity entity){
+    protected static Integer HasNewFuel(MachineBlockEntity entity){
         var needFuel = entity.machineBlockEntityProcessData.getEnergyNbt() < entity.machineBlockEntityProcessData.getMaxEnergy();
 
         if(!needFuel) {
@@ -198,7 +198,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
 
 
 
-    private static void addFuel(MachineBlockEntity entity, Integer energyValue){
+    protected static void addFuel(MachineBlockEntity entity, Integer energyValue){
         entity.removeStack(entity.ENERGY_SLOT, 1);
         entity.machineBlockEntityProcessData.increaseEnergy(energyValue);
     }
