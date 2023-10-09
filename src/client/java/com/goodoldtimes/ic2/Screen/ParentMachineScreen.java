@@ -17,7 +17,13 @@ public class ParentMachineScreen<E extends ScreenHandler> extends HandledScreen<
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        ScreenHelper.DrawBackgroundGeneric(context, width, backgroundWidth, height, backgroundHeight, TEXTURE, (ParentMachineScreenHandler) handler);
+        ScreenHelper.DrawBackgroundGeneric(context, width, backgroundWidth, height, backgroundHeight, TEXTURE);
+        drawBackgroundMachine(context, (ParentMachineScreenHandler) handler);
+    }
+
+    protected void drawBackgroundMachine(DrawContext context, ParentMachineScreenHandler handler){
+        context.drawTexture(TEXTURE, x + 56, y + 36, 176, 0, 14, handler.getScaledEnergy());
+        context.drawTexture(TEXTURE, x + 79, y + 34, 176, 14,  handler.getScaledProgress(),17);
     }
 
     @Override

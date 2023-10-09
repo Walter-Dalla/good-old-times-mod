@@ -27,15 +27,20 @@ public class ParentMachineScreenHandler  extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
 
-        this.addSlot(new Slot(inventory, 0, 56, 17));
-        this.addSlot(new Slot(inventory, 1, 116, 35));
-        this.addSlot(new Slot(inventory, 2, 56, 53));
+        addItemSlots(this.inventory);
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
 
         addProperties(delegate);
     }
+
+    protected void addItemSlots(Inventory inventory){
+        this.addSlot(new Slot(inventory, 0, 56, 17));
+        this.addSlot(new Slot(inventory, 1, 116, 35));
+        this.addSlot(new Slot(inventory, 2, 56, 53));
+    }
+
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;

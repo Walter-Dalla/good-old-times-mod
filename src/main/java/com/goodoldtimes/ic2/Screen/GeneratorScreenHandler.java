@@ -9,6 +9,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.slot.Slot;
 
 public class GeneratorScreenHandler extends ParentMachineScreenHandler {
     public GeneratorScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
@@ -20,5 +21,12 @@ public class GeneratorScreenHandler extends ParentMachineScreenHandler {
 
     public GeneratorScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate delegate) {
         super(syncId, playerInventory, inventory, delegate, ModScreenHandler.GENERATOR_SCREEN_HANDLER);
+    }
+
+    @Override
+    protected void addItemSlots(Inventory inventory){
+        this.addSlot(new Slot(inventory, 0, 65, 17));
+        this.addSlot(new Slot(inventory, 1, 125, 35));
+        this.addSlot(new Slot(inventory, 2, 65, 53));
     }
 }
