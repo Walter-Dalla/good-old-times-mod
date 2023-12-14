@@ -2,7 +2,6 @@ package com.goodoldtimes.item;
 
 import com.goodoldtimes.GoodOldTimesMod;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;

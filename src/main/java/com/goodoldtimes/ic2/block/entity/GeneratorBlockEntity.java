@@ -1,11 +1,9 @@
 package com.goodoldtimes.ic2.block.entity;
 
-import com.goodoldtimes.ic2.Screen.GeneratorScreenHandler;
-import com.goodoldtimes.ic2.block.Custom.Cable.ParentCableBlock;
-import com.goodoldtimes.ic2.block.Custom.GeneratorBlock;
-import com.goodoldtimes.ic2.block.Custom.MachineBlock;
-import com.goodoldtimes.ic2.block.Custom.ParentMachineBlock;
-import com.goodoldtimes.ic2.block.entity.Cable.ParentCableBlockEntity;
+import com.goodoldtimes.ic2.screen.GeneratorScreenHandler;
+import com.goodoldtimes.ic2.block.custom.cable.ParentCableBlock;
+import com.goodoldtimes.ic2.block.custom.GeneratorBlock;
+import com.goodoldtimes.ic2.block.custom.ParentMachineBlock;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import com.goodoldtimes.utils.dijkstra.Dijkstra;
 import com.goodoldtimes.utils.dijkstra.Graph;

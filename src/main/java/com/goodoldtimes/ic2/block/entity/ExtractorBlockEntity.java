@@ -1,11 +1,8 @@
 package com.goodoldtimes.ic2.block.entity;
 
-import com.goodoldtimes.ic2.Crafts.CompressorCrafts;
-import com.goodoldtimes.ic2.Crafts.ExtractorCrafts;
-import com.goodoldtimes.ic2.Screen.CompressorScreenHandler;
-import com.goodoldtimes.ic2.Screen.ExtractorScreenHandler;
-import com.goodoldtimes.ic2.block.Custom.CompressorBlock;
-import com.goodoldtimes.ic2.block.Custom.ExtractorBlock;
+import com.goodoldtimes.ic2.crafts.ExtractorCrafts;
+import com.goodoldtimes.ic2.screen.ExtractorScreenHandler;
+import com.goodoldtimes.ic2.block.custom.ExtractorBlock;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

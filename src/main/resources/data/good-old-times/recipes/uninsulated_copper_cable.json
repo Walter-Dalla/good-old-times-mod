@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "CCC",
+    "   "
+  ],
+  "key": {
+    "C": {
+      "item": "good-old-times:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "good-old-times:uninsulated_copper_cable",
+    "count": 6
+  }
+}

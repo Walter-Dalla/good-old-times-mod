@@ -1,10 +1,9 @@
 package com.goodoldtimes;
 
-import com.goodoldtimes.Screen.ModScreenHandler;
-import com.goodoldtimes.Block.ModBlock;
+import com.goodoldtimes.block.ModBlock;
+import com.goodoldtimes.screen.ModScreenHandler;
 import com.goodoldtimes.item.ModItems;
 import net.fabricmc.api.ModInitializer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

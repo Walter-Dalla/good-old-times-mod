@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SMS",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "M": {
+      "item": "good-old-times:machine_block"
+    },
+    "C": {
+      "item": "good-old-times:electronic_circuit"
+    }
+  },
+  "result": {
+    "item": "good-old-times:compressor_block",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "RFR",
+    "   "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "F": {
+      "item": "good-old-times:iron_furnace"
+    },
+    "C": {
+      "item": "good-old-times:electronic_circuit"
+    }
+  },
+  "result": {
+    "item": "good-old-times:electric_furnace_block",
+    "count": 1
+  }
+}

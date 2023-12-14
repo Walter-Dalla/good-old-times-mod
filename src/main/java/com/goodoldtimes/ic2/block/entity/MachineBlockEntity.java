@@ -1,7 +1,7 @@
 package com.goodoldtimes.ic2.block.entity;
 
-import com.goodoldtimes.Block.Entity.ImplementedInventory;
-import com.goodoldtimes.ic2.Crafts.ParentMachineCrafts;
+import com.goodoldtimes.block.entity.ImplementedInventory;
+import com.goodoldtimes.ic2.crafts.ParentMachineCrafts;
 import com.goodoldtimes.ic2.config.MachineBlockEntityProcessData;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -32,7 +32,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
     protected final PropertyDelegate propertyDelegate;
     public static final int PROPERTY_DELEGATE_SIZE = 4;
 
-    protected MachineBlockEntityProcessData machineBlockEntityProcessData;
+    protected final MachineBlockEntityProcessData machineBlockEntityProcessData;
 
     protected final int INPUT_SLOT = 0;
     protected final int OUTPUT_SLOT = 1;
@@ -43,7 +43,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
     public static final int ENERGY_INDEX_PROPERTY_DELEGATE = 2;
     public static final int MAX_ENERGY_INDEX_PROPERTY_DELEGATE = 3;
 
-    public String BLOCK_ID = "machine_block_entity";
+    public String BLOCK_ID;
 
     private static List<Item> GetValidCraftIngredients(MachineBlockEntity entity){
 
@@ -53,7 +53,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
                 craftsForEntity.keySet()
         );
     }
-    public static HashMap<String, HashMap<Item, Item>> CRAFTS = new HashMap<>();
+    public final static HashMap<String, HashMap<Item, Item>> CRAFTS = new HashMap<>();
 
     public MachineBlockEntity(BlockPos pos, BlockState state, HashMap<Item, Item> crafts, MachineBlockEntityProcessData processData,
                               BlockEntityType<?> modBlockEntity, String blockId) {
@@ -216,7 +216,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
     private static Item HasRecipe(MachineBlockEntity entity){
         var inputItem = HasCraftIngredientItemInSlot(entity, entity.INPUT_SLOT);
 
-        var crafts = entity.CRAFTS.getOrDefault(entity.BLOCK_ID, null);
+        var crafts = CRAFTS.getOrDefault(entity.BLOCK_ID, null);
         if(crafts == null){
             return null;
         }
@@ -238,7 +238,7 @@ public class MachineBlockEntity extends BlockEntity implements ExtendedScreenHan
 
     private static Item HasCraftIngredientItemInSlot(MachineBlockEntity entity, int craftSlotIndex){
         Item inputItem = null;
-        for(var validItem : entity.GetValidCraftIngredients(entity)){
+        for(var validItem : GetValidCraftIngredients(entity)){
 
             if(entity.getStack(craftSlotIndex).getItem() == validItem){
                 inputItem = validItem;

@@ -1,7 +1,7 @@
 package com.goodoldtimes;
 
-import com.goodoldtimes.ic2.Screen.*;
-import com.goodoldtimes.Screen.ModScreenHandler;
+import com.goodoldtimes.screen.ModScreenHandler;
+import com.goodoldtimes.ic2.screen.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 

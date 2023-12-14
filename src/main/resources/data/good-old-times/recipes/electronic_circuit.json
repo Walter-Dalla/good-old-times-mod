@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "RIR",
+    "RRR"
+  ],
+  "key": {
+    "C": {
+      "item": "good-old-times:copper_cable_block"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "good-old-times:refined_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "good-old-times:electronic_circuit",
+    "count": 1
+  }
+}

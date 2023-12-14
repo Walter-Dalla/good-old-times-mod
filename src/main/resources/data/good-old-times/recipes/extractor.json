@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TMF",
+    "TCF"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tree_tap"
+    },
+    "M": {
+      "item": "good-old-times:machine_block"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "C": {
+      "item": "good-old-times:electronic_circuit"
+    }
+  },
+  "result": {
+    "item": "good-old-times:extractor_block",
+    "count": 1
+  }
+}
